@@ -1,0 +1,12 @@
+{
+    "python.pythonPath": "env\\Scripts\\python.exe",
+    "cSpell.words": [
+        "arange",
+        "axhline",
+        "axvline",
+        "xlim",
+        "xticks",
+        "ylim",
+        "yticks"
+    ]
+}
