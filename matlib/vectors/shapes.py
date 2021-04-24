@@ -8,7 +8,11 @@ from ..vectors.types import Vector
 from ..enums import Color
 
 class shape(ABC):
-    
+    """abstract base class for shapes.
+
+    Args:
+        ABC ([type]): specifies abstract base class.
+    """
     @abstractmethod
     def plot(self):
         pass
@@ -70,7 +74,7 @@ class Arrow(shape):
     Args:
         shape ([type]): inheres shape.
     """
-    def __init__(self, tip, tail=(0,0), color=Color.Red):
+    def __init__(self, tip : Vector, tail=Vector(0,0), color=Color.Red):
         self.tip = tip
         self.tail = tail
         self.color = color
@@ -81,13 +85,13 @@ class Arrow(shape):
         tip, tail = self.tip, self.tail
         tip_length = (xlim()[1] - xlim()[0]) / 20.
         
-        length = sqrt((tip[1] - tail[1])**2 + (tip[0]-tail[0])**2)
+        length = sqrt((tip.y-tail.y)**2 + (tip.x-tail.x)**2)
         new_length = length - tip_length
 
-        new_y = (tip[1] - tail[1]) * (new_length / length)
-        new_x = (tip[0] - tail[0]) * (new_length / length)
+        new_y = (tip.y - tail.y) * (new_length / length)
+        new_x = (tip.x - tail.x) * (new_length / length)
 
-        plt.gca().arrow(tail[0], tail[1], new_x, new_y,
+        plt.gca().arrow(tail.x, tail.y, new_x, new_y,
             head_width=tip_length/1.5, head_length=tip_length,
             fc=self.color, ec=self.color)
 
@@ -114,7 +118,3 @@ class Segment(shape):
     def __iter__(self):
         yield self.start_point
         yield self.end_point
-
-def merge_vectors( shapes ):
-    for shape in shapes:
-        yield from shape
