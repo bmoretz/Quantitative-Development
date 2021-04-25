@@ -4,8 +4,8 @@ from abc import ABC, abstractmethod
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import xlim, ylim
 
-from ..vectors.types import Vector
-from ..enums import Color
+from matlib.vectors.types import Vector
+from matlib.enums import Color
 
 class shape(ABC):
     """abstract base class for shapes.
@@ -55,14 +55,15 @@ class Points(shape):
     Args:
         shape ([type]): inheres shape.
     """
-    def __init__(self, *vectors : Vector, color=Color.Black):
+    def __init__(self, *vectors : Vector, color=Color.Black,alpha=1):
         self.vectors = list(vectors)
         self.color = color
+        self.alpha = alpha
 
     def plot(self):
         xs = [v.x for v in self.vectors]
         ys = [v.y for v in self.vectors]
-        plt.scatter(xs, ys, color=self.color)
+        plt.scatter(xs, ys, color=self.color, alpha=self.alpha)
 
     def __iter__(self):
         for v in self.vectors:
@@ -118,3 +119,16 @@ class Segment(shape):
     def __iter__(self):
         yield self.start_point
         yield self.end_point
+
+
+def perimeter(*vectors : Vector) -> float:
+    from matlib.vectors.operators import distance
+    
+    perimeter, n = 0., len(vectors)
+    if n <= 1: return perimeter
+
+    for index in range(1, len(vectors)):
+        cur, prev = vectors[index], vectors[index-1]
+        perimeter += distance(cur, prev)
+
+    perimeter += vectors[0].distance(vectors[n-1])
