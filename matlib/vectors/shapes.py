@@ -118,6 +118,10 @@ class Segment(Shape):
         yield self.start_point
         yield self.end_point
 
+def merge_vectors( shapes : list[Shape] ):
+    for shape in shapes:
+        yield from shape
+
 def perimeter( shape : Shape ) -> float:
 
     from matlib.vectors.operators import distance

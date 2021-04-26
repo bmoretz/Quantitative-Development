@@ -10,11 +10,7 @@ from matplotlib.pyplot import xlim, ylim
 
 from matlib.enums import Color
 from matlib.vectors.types import Vector
-
-def merge_vectors( shapes ):
-
-    for shape in shapes:
-        yield from shape
+from matlib.vectors.shapes import merge_vectors
 
 def draw_shapes(*shapes : Vector, origin=True, axes=True, grid=(1,1), nice_aspect_ratio=True,
                 width=6, save_as=None) -> None:
