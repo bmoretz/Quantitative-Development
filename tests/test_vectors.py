@@ -88,3 +88,49 @@ class TestVectorOperators(unittest.TestCase):
         expected = 1.414
 
         assert actual == expected
+
+
+class TestVectorTransforms(unittest.TestCase):
+
+    def test_scale(self):
+    
+        vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
+
+        actual = scale(vectors, .5)
+        expected = make_vectors([(.5, 0), (.5, .5), (0, .5), (0, 0)])
+
+        for index in range(len(vectors)):
+            assert actual[index] == expected[index]
+
+
+    def test_shift(self):
+
+        vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
+
+        actual = shift(vectors, x=1, y=1)
+        expected = make_vectors([(2, 1), (2, 2), (1, 2), (1, 1)])
+
+        for index in range(len(vectors)):
+            assert actual[index] == expected[index]
+
+    def test_flip(self):
+
+        vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
+
+        actual = flip(vectors)
+        expected = make_vectors([(-1, 0), (-1, -1), (0, -1), (0, 0)])
+
+        for index in range(len(vectors)):
+            assert actual[index] == expected[index]
+
+
+class TestVectorShapes(unittest.TestCase):
+
+    def test_perimeter(self):
+
+        vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
+
+        actual = perimeter(Points(*vectors))
+        expected = 4
+
+        assert actual == expected

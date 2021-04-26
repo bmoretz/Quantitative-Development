@@ -7,7 +7,8 @@ from matplotlib.pyplot import xlim, ylim
 from matlib.vectors.types import Vector
 from matlib.enums import Color
 
-class shape(ABC):
+class Shape(ABC):
+
     """abstract base class for shapes.
 
     Args:
@@ -16,12 +17,12 @@ class shape(ABC):
     @abstractmethod
     def plot(self):
         pass
-
+    
     @abstractmethod
     def __iter__(self):
         pass
 
-class Polygon(shape):
+class Polygon(Shape):
     """Polygon.
 
     Args:
@@ -48,8 +49,7 @@ class Polygon(shape):
     def __iter__(self):
         for v in self.vertices:
             yield v
-
-class Points(shape):
+class Points(Shape):
     """Points.
 
     Args:
@@ -68,8 +68,7 @@ class Points(shape):
     def __iter__(self):
         for v in self.vectors:
             yield v
-
-class Arrow(shape):
+class Arrow(Shape):
     """Arrow.
 
     Args:
@@ -99,8 +98,7 @@ class Arrow(shape):
     def __iter__(self):
         yield self.tip
         yield self.tail
-
-class Segment(shape):
+class Segment(Shape):
     """Line Segment.
 
     Args:
@@ -120,10 +118,12 @@ class Segment(shape):
         yield self.start_point
         yield self.end_point
 
+def perimeter( shape : Shape ) -> float:
 
-def perimeter(*vectors : Vector) -> float:
     from matlib.vectors.operators import distance
-    
+
+    vectors = list(shape)
+
     perimeter, n = 0., len(vectors)
     if n <= 1: return perimeter
 
@@ -131,4 +131,6 @@ def perimeter(*vectors : Vector) -> float:
         cur, prev = vectors[index], vectors[index-1]
         perimeter += distance(cur, prev)
 
-    perimeter += vectors[0].distance(vectors[n-1])
+    perimeter += distance(vectors[0], vectors[n-1])
+
+    return perimeter
