@@ -98,6 +98,7 @@ class Arrow(Shape):
     def __iter__(self):
         yield self.tip
         yield self.tail
+
 class Segment(Shape):
     """Line Segment.
 
@@ -117,6 +118,23 @@ class Segment(Shape):
     def __iter__(self):
         yield self.start_point
         yield self.end_point
+
+def regular_polygon(sides : int, length = 1., center = Vector(0, 0)) -> list[Vector]:
+    """[summary]
+
+    Args:
+        sides (int): number of sides
+        length ([type], optional): side lengths. Defaults to 1..
+        center ([type], optional): center point. Defaults to Vector(0, 0).
+
+    Returns:
+        list[Vector]: a regular polygon with k sides of length n centered
+        at point p.
+    """
+    from math import pi
+
+    return [Vector(length, 2*pi*k/sides).to_cartesian() + center 
+            for k in range(0, sides)]
 
 def merge_vectors( shapes : list[Shape] ):
     for shape in shapes:

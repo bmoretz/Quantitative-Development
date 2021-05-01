@@ -164,3 +164,12 @@ class TestVectorCoordinates(unittest.TestCase):
         expected = Vector(3.60555, 2.1588)
 
         assert almost_equal(actual, expected, accuracy=10**-5)
+
+    def test_to_cartesian1(self):
+
+        v = Vector(3.60555, 2.1588)
+
+        actual = v.to_cartesian()
+        expected = Vector(-2, 3)
+
+        assert almost_equal(actual, expected, accuracy=10**-5)

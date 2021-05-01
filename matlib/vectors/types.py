@@ -1,7 +1,7 @@
 from decimal import Decimal
 from typing import NamedTuple
 from functools import singledispatchmethod
-from math import sqrt, atan2
+from math import sqrt, sin, cos, atan2
 
 class Vector(NamedTuple):
     """Vector Definition"""
@@ -29,6 +29,10 @@ class Vector(NamedTuple):
 
     def to_polar(self):
         return Vector(self.length(), atan2(self.y, self.x))
+    
+    def to_cartesian(self):
+        length, angle = self.x, self.y
+        return Vector(length*cos(angle),length*sin(angle))
 
 @Vector.__add__.register(Decimal)
 @Vector.__add__.register(float)
