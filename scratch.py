@@ -11,6 +11,10 @@ dino_vectors = make_vectors([(6,4), (3,1), (1,2), (-1,5), (-2,5), (-3,4), (-4,4)
 
 vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
 
-pt = Points(*dino_vectors)
+point = Vector(-2, 3)
 
-print(perimeter(pt))
+p = point.to_polar()
+
+x, y = p
+
+print(round(x,5), round(y, 5))

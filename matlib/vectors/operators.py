@@ -1,4 +1,4 @@
-from matlib.vectors.types import Vector
+from ..vectors.types import Vector
 
 def add(v1 : Vector, v2 : Vector) -> Vector:
     return v1 + v2

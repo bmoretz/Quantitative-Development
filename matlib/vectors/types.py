@@ -1,6 +1,7 @@
-from typing import NamedTuple, List
-
-from math import sqrt
+from decimal import Decimal
+from typing import NamedTuple
+from functools import singledispatchmethod
+from math import sqrt, atan2
 
 class Vector(NamedTuple):
     """Vector Definition"""
@@ -10,18 +11,54 @@ class Vector(NamedTuple):
     def __eq__(self, other):
         return self.x == other.x and \
             self.y == other.y
-
-    def  __add__(self, other):
-        return Vector(self.x + other.x, self.y + other.y)
     
-    def __sub__(self, other):
-        return Vector(self.x - other.x, self.y - other.y)
+    @singledispatchmethod
+    def  __add__(self, _):
+        raise NotImplemented
+    
+    @singledispatchmethod
+    def __sub__(self, _):
+        raise NotImplemented
 
-    def __mul__(self, other):
-        return Vector(self.x * other.x, self.y * other.y)
+    @singledispatchmethod
+    def __mul__(self, _):
+        raise NotImplemented
 
     def length(self):
         return sqrt(self.x**2 + self.y**2)
+
+    def to_polar(self):
+        return Vector(self.length(), atan2(self.y, self.x))
+
+@Vector.__add__.register(Decimal)
+@Vector.__add__.register(float)
+@Vector.__add__.register(int)
+def  _(self, value):
+    return Vector(self.x + value, self.y + value)
+
+@Vector.__add__.register(Vector)
+def  _(self, other):
+    return Vector(self.x + other.x, self.y + other.y)
+
+@Vector.__sub__.register(Decimal)
+@Vector.__sub__.register(float)
+@Vector.__sub__.register(int)
+def  _(self, value):
+    return Vector(self.x - value, self.y - value)
+
+@Vector.__sub__.register(Vector)
+def  _(self, other):
+    return Vector(self.x - other.x, self.y - other.y)
+
+@Vector.__mul__.register(Decimal)
+@Vector.__mul__.register(float)
+@Vector.__mul__.register(int)
+def  _(self, value):
+    return Vector(self.x * value, self.y * value)
+
+@Vector.__mul__.register(Vector)
+def  _(self, other):
+    return Vector(self.x * other.x, self.y * other.y)
 
 def make_vector( v : tuple[float, float]) -> Vector:
     return Vector._make(v)

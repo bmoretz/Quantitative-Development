@@ -1,9 +1,10 @@
+import unittest
+
 import sys
 sys.path.append('./')
 
-import unittest
-
 from matlib.vectors import *
+from tests.utilities import almost_equal
 
 class TestMakeVector(unittest.TestCase):
     """test methods for making vectors.
@@ -40,6 +41,12 @@ class TestVectorOperators(unittest.TestCase):
 
         assert add(u, v) == Vector(3, -1)
 
+    def test_add3(self):
+        u = Vector(3,1)
+        v = 3
+
+        assert u + v == Vector(6, 4)
+
     def test_sub1(self):
         u, v = make_vectors([(2,-1), (1, 0)])
 
@@ -49,6 +56,12 @@ class TestVectorOperators(unittest.TestCase):
         u, v = make_vectors([(2,-1), (1, 0)])
 
         assert subtract(u, v) == Vector(1, -1)
+
+    def test_sub3(self):
+        u = Vector(3,1)
+        v = 1
+
+        assert u - v == Vector(2, 0)
 
     def test_multiply1(self):
 
@@ -61,6 +74,12 @@ class TestVectorOperators(unittest.TestCase):
         u, v = make_vectors([(2,-1), (1, 1)])
 
         assert multiply(u, v) == Vector(2, -1)
+
+    def test_multiply3(self):
+        u = Vector(3,1)
+        v = 3
+
+        assert u * v == Vector(9, 3)
 
     def test_length1(self):
 
@@ -134,3 +153,14 @@ class TestVectorShapes(unittest.TestCase):
         expected = 4
 
         assert actual == expected
+
+class TestVectorCoordinates(unittest.TestCase):
+
+    def test_to_polar1(self):
+
+        v = Vector(-2, 3)
+
+        actual = v.to_polar()
+        expected = Vector(3.60555, 2.1588)
+
+        assert almost_equal(actual, expected, accuracy=10**-5)

@@ -4,8 +4,8 @@ from abc import ABC, abstractmethod
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import xlim, ylim
 
-from matlib.vectors.types import Vector
-from matlib.enums import Color
+from ..vectors.types import Vector
+from ..enums import Color
 
 class Shape(ABC):
 

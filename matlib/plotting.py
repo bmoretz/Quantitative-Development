@@ -8,9 +8,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import xlim, ylim
 
-from matlib.enums import Color
-from matlib.vectors.types import Vector
-from matlib.vectors.shapes import merge_vectors
+from .enums import Color
+from .vectors.types import Vector
+from .vectors.shapes import merge_vectors
 
 def draw_shapes(*shapes : Vector, origin=True, axes=True, grid=(1,1), nice_aspect_ratio=True,
                 width=6, save_as=None) -> None:

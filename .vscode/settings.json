@@ -4,6 +4,7 @@
         "arange",
         "axhline",
         "axvline",
+        "isclose",
         "xlim",
         "xticks",
         "ylim",

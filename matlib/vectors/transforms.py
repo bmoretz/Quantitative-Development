@@ -1,4 +1,4 @@
-from matlib.vectors.types import Vector
+from ..vectors.types import Vector
 
 def shift(vectors : list[Vector], x : float, y : float) -> Vector:
     """shifts / translates a set of vectors.
