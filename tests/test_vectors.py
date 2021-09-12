@@ -1,10 +1,10 @@
-import unittest
-
-import sys
-sys.path.append('./')
+import unittest, sys
 
 from matlib.vectors import *
+
 from tests.utilities import almost_equal
+
+sys.path.append('./')
 
 class TestMakeVector(unittest.TestCase):
     """test methods for making vectors.
@@ -44,6 +44,8 @@ class TestVectorOperators(unittest.TestCase):
     def test_add3(self):
         u = Vector(3,1)
         v = 3
+
+        
 
         assert u + v == Vector(6, 4)
 
@@ -107,7 +109,6 @@ class TestVectorOperators(unittest.TestCase):
         expected = 1.414
 
         assert actual == expected
-
 
 class TestVectorTransforms(unittest.TestCase):
 
