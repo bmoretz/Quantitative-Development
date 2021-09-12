@@ -18,7 +18,8 @@
     ],
     "python.linting.pylintArgs": [
         "--disable=C0103",
-        "--disable=C0114"
+        "--disable=C0114",
+        "--disable=multiple-imports"
     ],
     "python.testing.pytestEnabled": false,
     "python.testing.nosetestsEnabled": false,

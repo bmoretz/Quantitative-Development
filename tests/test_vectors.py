@@ -1,6 +1,12 @@
 import unittest, sys
 
-from matlib.vectors import *
+from matlib.vectors import (
+    Vector, Points,
+    add, subtract, multiply,
+    length, distance, perimeter,
+    scale, shift, flip,
+    make_vector, make_vectors
+)
 
 from tests.utilities import almost_equal
 
@@ -10,17 +16,23 @@ class TestMakeVector(unittest.TestCase):
     """test methods for making vectors.
 
     Args:
-        unittest ([type]): unit test
+        unittest ([type]): vector
     """
-    def test_single(self):
-
+    @staticmethod
+    def test_single() -> None:
+        """
+        single
+        """
         u = (1., 1.)
         assert isinstance(u, tuple)
         v = make_vector(u)
         assert isinstance(v, Vector)
 
-    def test_multiple(self):
-
+    @staticmethod
+    def test_multiple() -> None:
+        """
+        multiply
+        """
         u = [(1,1), (0,1), (0,0), (1,0)]
 
         v = make_vectors(u)
@@ -29,62 +41,100 @@ class TestMakeVector(unittest.TestCase):
             assert isinstance(z, Vector)
 
 class TestVectorOperators(unittest.TestCase):
-
-    def test_add1(self):
-
+    """
+    test vector operators
+    Args:
+        unittest ([type]): Vector
+    """
+    @staticmethod
+    def test_add1():
+        """
+        add uc 1
+        """
         u, v = make_vectors([(2,-1), (1, 0)])
 
         assert u + v == Vector(3, -1)
 
-    def test_add2(self):
+    @staticmethod
+    def test_add2():
+        """
+        add uc 2
+        """
         u, v = make_vectors([(2,-1), (1, 0)])
 
         assert add(u, v) == Vector(3, -1)
 
-    def test_add3(self):
+    @staticmethod
+    def test_add3():
+        """
+        add uc3
+        """
         u = Vector(3,1)
         v = 3
 
-        
-
         assert u + v == Vector(6, 4)
 
-    def test_sub1(self):
+    @staticmethod
+    def test_sub1():
+        """
+        sub uc 1
+        """
         u, v = make_vectors([(2,-1), (1, 0)])
 
         assert u - v == Vector(1, -1)
 
-    def test_sub2(self):
+    @staticmethod
+    def test_sub2():
+        """
+        sub uc 2
+        """
         u, v = make_vectors([(2,-1), (1, 0)])
 
         assert subtract(u, v) == Vector(1, -1)
 
-    def test_sub3(self):
+    @staticmethod
+    def test_sub3():
+        """
+        sub uc 3
+        """
         u = Vector(3,1)
         v = 1
 
         assert u - v == Vector(2, 0)
 
-    def test_multiply1(self):
-
+    @staticmethod
+    def test_multiply1():
+        """
+        multiply uc 1
+        """
         u, v = make_vectors([(2,-1), (1, 1)])
 
         assert u * v == Vector(2, -1)
 
-    def test_multiply2(self):
-
+    @staticmethod
+    def test_multiply2():
+        """
+        multiply uc 2
+        """
         u, v = make_vectors([(2,-1), (1, 1)])
 
         assert multiply(u, v) == Vector(2, -1)
 
-    def test_multiply3(self):
+    @staticmethod
+    def test_multiply3() -> None:
+        """
+        multiply uc 3
+        """
         u = Vector(3,1)
         v = 3
 
         assert u * v == Vector(9, 3)
 
-    def test_length1(self):
-
+    @staticmethod
+    def test_length1() -> None:
+        """
+        length uc 1
+        """
         u = make_vector((4, 2))
 
         actual = round(u.length(), 3)
@@ -92,7 +142,7 @@ class TestVectorOperators(unittest.TestCase):
 
         assert actual == expected
 
-    def test_length2(self):
+    def test_length2(self) -> None:
 
         u = make_vector((4, 2))
 
@@ -101,7 +151,7 @@ class TestVectorOperators(unittest.TestCase):
 
         assert actual == expected
 
-    def test_distance(self):
+    def test_distance(self) -> None:
 
         u, v = make_vectors([(2,-1), (1, 0)])
 
@@ -111,9 +161,16 @@ class TestVectorOperators(unittest.TestCase):
         assert actual == expected
 
 class TestVectorTransforms(unittest.TestCase):
-
-    def test_scale(self):
-    
+    """
+    class for testing transformations
+    Args:
+        unittest ([type]): Vector
+    """
+    @staticmethod
+    def test_scale() -> None:
+        """
+        test scale
+        """
         vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
 
         actual = scale(vectors, .5)
@@ -122,9 +179,11 @@ class TestVectorTransforms(unittest.TestCase):
         for index in range(len(vectors)):
             assert actual[index] == expected[index]
 
-
-    def test_shift(self):
-
+    @staticmethod
+    def test_shift() -> None:
+        """
+        test shift
+        """
         vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
 
         actual = shift(vectors, x=1, y=1)
@@ -133,8 +192,11 @@ class TestVectorTransforms(unittest.TestCase):
         for index in range(len(vectors)):
             assert actual[index] == expected[index]
 
-    def test_flip(self):
-
+    @staticmethod
+    def test_flip() -> None:
+        """
+        test flip
+        """
         vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
 
         actual = flip(vectors)
@@ -143,11 +205,18 @@ class TestVectorTransforms(unittest.TestCase):
         for index in range(len(vectors)):
             assert actual[index] == expected[index]
 
-
 class TestVectorShapes(unittest.TestCase):
-
-    def test_perimeter(self):
-
+    """
+    test perimeter
+    Args:
+        unittest ([type]): class for testing shape
+        functions.
+    """
+    @staticmethod
+    def test_perimeter() -> None:
+        """
+        test perimiter
+        """
         vectors = make_vectors([(1,0), (1,1), (0,1), (0,0)])
 
         actual = perimeter(Points(*vectors))
@@ -156,9 +225,16 @@ class TestVectorShapes(unittest.TestCase):
         assert actual == expected
 
 class TestVectorCoordinates(unittest.TestCase):
-
-    def test_to_polar1(self):
-
+    """
+    test coordinate conversions
+    Args:
+        unittest ([type]): [description]
+    """
+    @staticmethod
+    def test_to_polar1() -> None:
+        """
+        test to_polar
+        """
         v = Vector(-2, 3)
 
         actual = v.to_polar()
@@ -166,8 +242,11 @@ class TestVectorCoordinates(unittest.TestCase):
 
         assert almost_equal(actual, expected, accuracy=10**-5)
 
-    def test_to_cartesian1(self):
-
+    @staticmethod
+    def test_to_cartesian1() -> None:
+        """
+        test to_cartesian
+        """
         v = Vector(3.60555, 2.1588)
 
         actual = v.to_cartesian()
