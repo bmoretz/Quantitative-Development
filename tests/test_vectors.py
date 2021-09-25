@@ -142,8 +142,11 @@ class TestVectorOperators(unittest.TestCase):
 
         assert actual == expected
 
-    def test_length2(self) -> None:
-
+    @staticmethod
+    def test_length2() -> None:
+        """
+        length uc 2
+        """
         u = make_vector((4, 2))
 
         actual = round(length(u), 3)
@@ -151,8 +154,11 @@ class TestVectorOperators(unittest.TestCase):
 
         assert actual == expected
 
-    def test_distance(self) -> None:
-
+    @staticmethod
+    def test_distance() -> None:
+        """
+        distance
+        """
         u, v = make_vectors([(2,-1), (1, 0)])
 
         actual = round(distance(u, v), 3)

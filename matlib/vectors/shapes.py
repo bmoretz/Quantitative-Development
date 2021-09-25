@@ -100,7 +100,7 @@ class Points(Shape):
 
         Yields:
             Iterator[Vector]: the points (iterable)
-        """    
+        """
         for v in self.vectors:
             yield v
 class Arrow(Shape):
@@ -164,7 +164,7 @@ class Segment(Shape):
 
         Yields:
             Iterator[Vector]: the points (iterable)
-        """        
+        """
         yield self.start_point
         yield self.end_point
 

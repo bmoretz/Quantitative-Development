@@ -1,8 +1,9 @@
-from math import sin, cos, tan, pi, atan2
-
 from matlib.enums import Color
 from matlib.plotting import draw_shapes
-from matlib.vectors import *
+from matlib.vectors import (
+    Polygon,
+    make_vectors, regular_polygon
+)
 
 dino_vectors = make_vectors([(6,4), (3,1), (1,2), (-1,5), (-2,5), (-3,4), (-4,4),
     (-5,3), (-5,2), (-2,2), (-5,1), (-4,0), (-2,1), (-1,0), (0,-3),
